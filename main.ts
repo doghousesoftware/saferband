@@ -11,10 +11,8 @@ input.onPinPressed(TouchPin.P0, function () {
 })
 radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 1) {
-        basic.showString("do on things")
         steps = 0
     } else {
-        basic.showString("do off things")
         radio.sendValue("steps", steps)
     }
 })
@@ -25,9 +23,10 @@ function allOff () {
     pins.digitalWritePin(DigitalPin.P3, 0)
 }
 function audioVisualAlerts () {
-    basic.showString("lights sounds")
     randomSounds()
-    randomLights()
+    if (input.lightLevel() < 50) {
+        randomLights()
+    }
 }
 input.onGesture(Gesture.Shake, function () {
     steps += 1
@@ -51,10 +50,10 @@ function randomLights () {
 }
 function randomSounds () {
     for (let index = 0; index < 2; index++) {
-        music.playTone(262, music.beat(BeatFraction.Whole))
-        music.rest(music.beat(BeatFraction.Whole))
-        music.playTone(523, music.beat(BeatFraction.Whole))
-        music.rest(music.beat(BeatFraction.Whole))
+        music.playTone(262, music.beat(BeatFraction.Quarter))
+        music.rest(music.beat(BeatFraction.Quarter))
+        music.playTone(523, music.beat(BeatFraction.Quarter))
+        music.rest(music.beat(BeatFraction.Quarter))
     }
 }
 let rnd = 0
