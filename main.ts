@@ -18,6 +18,12 @@ radio.onReceivedNumber(function (receivedNumber) {
         radio.sendValue("steps", steps)
     }
 })
+function allOff () {
+    basic.pause(1000)
+    pins.digitalWritePin(DigitalPin.P1, 0)
+    pins.digitalWritePin(DigitalPin.P2, 0)
+    pins.digitalWritePin(DigitalPin.P3, 0)
+}
 function audioVisualAlerts () {
     basic.showString("lights sounds")
     randomSounds()
@@ -33,11 +39,25 @@ radio.onReceivedValue(function (name, value) {
     }
 })
 function randomLights () {
-    basic.showIcon(IconNames.SmallHeart)
+    rnd = randint(1, 3)
+    if (rnd == 1) {
+        pins.digitalWritePin(DigitalPin.P1, 1)
+    } else if (rnd == 2) {
+        pins.digitalWritePin(DigitalPin.P2, 1)
+    } else {
+        pins.digitalWritePin(DigitalPin.P3, 1)
+    }
+    allOff()
 }
 function randomSounds () {
-    basic.showIcon(IconNames.Target)
+    for (let index = 0; index < 2; index++) {
+        music.playTone(262, music.beat(BeatFraction.Whole))
+        music.rest(music.beat(BeatFraction.Whole))
+        music.playTone(523, music.beat(BeatFraction.Whole))
+        music.rest(music.beat(BeatFraction.Whole))
+    }
 }
+let rnd = 0
 let steps = 0
 let onoff = 0
 radio.setGroup(1)
