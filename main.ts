@@ -13,20 +13,18 @@ radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 1) {
         steps = 0
     } else {
+        allOff()
         radio.sendValue("steps", steps)
     }
 })
 function allOff () {
-    basic.pause(1000)
+    basic.pause(500)
     pins.digitalWritePin(DigitalPin.P1, 0)
     pins.digitalWritePin(DigitalPin.P2, 0)
-    pins.digitalWritePin(DigitalPin.P3, 0)
 }
 function audioVisualAlerts () {
     randomSounds()
-    if (input.lightLevel() < 50) {
-        randomLights()
-    }
+    randomLights()
 }
 input.onGesture(Gesture.Shake, function () {
     steps += 1
@@ -38,13 +36,11 @@ radio.onReceivedValue(function (name, value) {
     }
 })
 function randomLights () {
-    rnd = randint(1, 3)
+    rnd = randint(1, 2)
     if (rnd == 1) {
         pins.digitalWritePin(DigitalPin.P1, 1)
-    } else if (rnd == 2) {
-        pins.digitalWritePin(DigitalPin.P2, 1)
     } else {
-        pins.digitalWritePin(DigitalPin.P3, 1)
+        pins.digitalWritePin(DigitalPin.P2, 1)
     }
     allOff()
 }
