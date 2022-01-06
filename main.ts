@@ -20,6 +20,8 @@ radio.onReceivedNumber(function (receivedNumber) {
 })
 function audioVisualAlerts () {
     basic.showString("lights sounds")
+    randomSounds()
+    randomLights()
 }
 input.onGesture(Gesture.Shake, function () {
     steps += 1
@@ -30,6 +32,12 @@ radio.onReceivedValue(function (name, value) {
         basic.showNumber(value)
     }
 })
+function randomLights () {
+    basic.showIcon(IconNames.SmallHeart)
+}
+function randomSounds () {
+    basic.showIcon(IconNames.Target)
+}
 let steps = 0
 let onoff = 0
 radio.setGroup(1)
